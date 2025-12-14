@@ -1,0 +1,9 @@
+displayName: 'Local Ip Addr'
+type: middleware
+
+import: github.com/qiudesong/traefik-plugin-localipaddr
+
+summary: 'Get local ip address'
+
+testData:
+  enabled: true
