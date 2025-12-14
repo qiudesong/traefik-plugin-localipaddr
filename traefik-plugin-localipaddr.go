@@ -1,11 +1,11 @@
-// Package pluginshellexec a plugin to execute shell scripts on requests.
-package pluginshellexec
+package traefik_plugin_localipaddr
 
 import (
 	"context"
 	"fmt"
 	"net"
 	"net/http"
+	"os"
 )
 
 // Config the plugin configuration.
@@ -44,11 +44,12 @@ func (r *plugin) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	rw.Header().Set("Content-Type", "plant/html")
+	rw.Header().Set("Content-Type", "text/plan")
 
 	ip, err := getNetworkIpv6Addr(r.config.Domain, r.config.Ipv4)
 	if err != nil {
 		rw.WriteHeader(http.StatusInternalServerError)
+		_, _ = os.Stderr.WriteString(fmt.Sprintf("failed to get ipaddr. err:%+v", err))
 		_, _ = fmt.Fprintf(rw, "failed to get ipaddr. err:%+v", err)
 		return
 	}
